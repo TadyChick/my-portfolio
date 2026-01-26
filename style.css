@@ -613,4 +613,7 @@ li {
   .projects-grid {
     grid-template-columns: 1fr;
   }
+  .location, .telephone, .email{
+    font-size: 17px;
+}
 }
