@@ -1,434 +1,717 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Tadas Cikanavičius</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anta&family=Almarai:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="portfolio-style.css" />
-</head>
-<body>
-    <div id="videoModal" class="modal">
-      <div class="modal-content">
-            <div class="close-header">
-                <div class="close-area" onclick="closeModal()">
-                    <span class="x-btn">&times;</span>
-                    <span class="close-text">Close</span>
-                </div>
-            </div>
-            
-            <div class="video-wrapper">
-                <div class="loader-container">
-                    <div class="spinner"></div>
-                </div>
-                <iframe id="modalIframe" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            </div>
-            <h3 id="modalTitle">Project Title</h3>
-        </div>
-    </div>
+:root {
+  --bg: #0f0f12;
+  --bg-light: #D8DCE8;
+  --panel: #17171c;
+  --accent: #263452;
+  --accent-light: #515F7D;
+  --dark: #151E2A;
+  --text: #fff;
+  --muted: #9a9aa3;
+}
 
-    <div class="header-s">
-        <div class="main-wrap">
-            <div class="profile-photo">
-            <img src="/assets/tadas_profile.png" alt="Profile photo placeholder">
-            </div>
-            <div class="hero-info">
-            <div class="name">Tadas</div>
-            <div class="surname">Cikanavičius</div>
-            <div class="role">Digital content engineer</div>
-            <div class="contacts-wrap">
-                <div class="location">
-                    <div><img src="/assets/location_on.svg" alt="KTU logotipas"></div>
-                    <div class="contacts-t">Kaunas</div>
-                </div>
-                
-                <div class="telephone">
-                    <div><img src="/assets/phone.svg" alt="KTU logotipas"></div>
-                    <div class="contacts-t">+370 674 23729</div>
-                </div>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-                <div class="email">
-                    <div><img src="/assets/email.svg" alt="KTU logotipas"></div>
-                    <div class="contacts-t">tadascikanavicius090@gmail.com</div>
-                </div>
-            </div>
-            </div>
-        </div>
-    </div>
+body { background: var(--bg); padding: 0px 0px; font-family: 'Almarai:Regular', sans-serif; color: var(--text);}
 
-    <div class="portfolio-t"><h1>PORTFOLIO</h1></div>
+.header-s {
+  position: relative;
+  height: 350px;
+  width: 100%;
+  /* Move background here to ensure it's tied to the 300px height */
+  background-image: url('/assets/banner-sea.png');
+  background-size: auto auto;
+  background-position: right;
+  background-repeat: no-repeat;
+  
+  /* This is key: it forces the container to 'clip' anything 
+     leaking out, like margins from the name or role */
+  overflow: hidden; 
+}
 
-    <!-- SHOWREEL CARD -->
-    <section class="featured-video-section">
-        <div class="showreel-card" onclick="openProject('showreel')">
-          <div class="image-container">
-            <div class="play-button">
-              <img src="/assets/Play.svg" alt="Play Icon">
-            </div>
-            <img src="/assets/showreel-thumb.png" alt="Project Thumbnail" class="main-image">
-            <div class="gradient-overlay"></div>
-          </div>
-          <div class="project-info">
-              <h2 class="project-title">SHOWREEL 2026</h2>
-              <p class="description">Collection of my best 3D work and digital content engineering throughout the years</p>
-          </div>
-        </div>
-    </section>
+/* Use .header-s::after instead of header::after */
+.header-s::after {
+  content: "";
+  position: absolute;
+  /* 'inset: 0' is a pro-shorthand for top, bottom, left, right: 0 */
+  inset: 0; 
+  background: linear-gradient(to right, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
 
+.main-wrap {
+  position: relative;
+  z-index: 2; /* Keeps text above the filter */
+  height: 100%; /* Force the grid to be exactly 300px */
+  width: 100%;
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  align-items: center; /* Vertically centers everything */
+  margin: 0;
+  padding: 0;
+}
 
-    <section class="project-s">
-      <h3>Multimedia and visual storytelling</h3>
-      <div class="projects-grid">
+/* Fix your contacts-wrap position */
+.contacts-wrap {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  gap: 80px;
+  /* Use a positive number to keep it inside the 300px box */
+  bottom: 20px; 
+}
 
-        <!-- PROJECT CARD -->
-        <div class="project-card" onclick="openProject('uninvited-guests')" style="cursor: pointer;">
-          <div class="image-container">
-            <div class="play-button">
-              <img src="/assets/Play.svg" alt="Play Icon">
-            </div>
-            <img src="/assets/uninvited-guests.png" alt="Project Thumbnail" class="main-image">
-            
-            <div class="gradient-overlay"></div>
-
-            <div class="labels-wrapper">
-              <div class="badge">
-                <img src="/assets/best-execution.png" alt="icon">
-                <span>“best execution” in 3D course</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-info">
-            <p class="description">Team lead in 3D animation Short Film</p>
-            <h4 class="project-title">Uninvited Guests</h4>
-          </div>
-        </div>
-
-        <!-- PROJECT CARD -->
-        <div class="project-card" onclick="openProject('under-control')" style="cursor: pointer;">
-          <div class="image-container">
-            <div class="play-button"><img src="/assets/Play.svg" alt="Project Thumbnail" class="main-image"></div>
-            <img src="/assets/under-control.png" alt="Project Thumbnail" class="main-image">
-            
-            <div class="gradient-overlay"></div>
-
-            <div class="labels-wrapper">
-              <div class="badge">
-                <img src="/assets/best-rated.png" alt="icon">
-                <span>“best rated” in A.V. Lab course</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-info">
-            <p class="description">Producer and team lead in Short Film</p>
-            <h4 class="project-title">Under Control</h4>
-          </div>
-        </div>
-
-        <!-- PROJECT CARD -->
-        <div class="project-card" onclick="openProject('my-canine-friend')" style="cursor: pointer;">
-          <div class="image-container">
-            <div class="play-button"><img src="/assets/Play.svg" alt="Project Thumbnail" class="main-image"></div>
-            <img src="/assets/my-canine-friend.png" alt="Project Thumbnail" class="main-image">
-            <div class="gradient-overlay"></div>
-          </div>
-
-          <div class="project-info">
-            <p class="description">Technical/creative lead and operator in TV show prototype</p>
-            <h4 class="project-title">My Canine Friend</h4>
-          </div>
-        </div>
-
-        <!-- PROJECT CARD -->
-        <div class="project-card" onclick="openProject('itu')" style="cursor: pointer;">
-          <div class="image-container">
-            <div class="play-button"><img src="/assets/Play.svg" alt="Project Thumbnail" class="main-image"></div>
-            <img style="object-position: 100% 100%;" src="/assets/ITU-male-thumb.png" alt="Project Thumbnail" class="main-image">
-            <div class="gradient-overlay"></div>
-          </div>
-
-          <div class="project-info">
-            <p class="description">Creator of an audiovisual, 3D animation project -</p>
-            <h4 class="project-title">“Into The Unknown” | Male version - feat. Ry & Rusnė</h4>
-          </div>
-        </div>
-
-                <!-- PROJECT CARD -->
-        <div class="project-card" onclick="openProject('behind-the-matrix')" style="cursor: pointer;">
-          <div class="image-container">
-            <div class="play-button"><img src="/assets/Play.svg" alt="Project Thumbnail" class="main-image"></div>
-            <img  src="/assets/behind-the-matrix-thumb.png" alt="Project Thumbnail" class="main-image">
-            <div class="gradient-overlay"></div>
-          </div>
-
-          <div class="project-info">
-            <p class="description">Creator of an individual 2D animation Short Film</p>
-            <h4 class="project-title">Behind the Matrix</h4>
-          </div>
-        </div>
-
-        <!-- PROJECT CARD -->
-        <div class="project-card" onclick="openProject('perfumes')" style="cursor: pointer;">
-          <div class="image-container">
-            <div class="play-button"><img src="/assets/Play.svg" alt="Project Thumbnail" class="main-image"></div>
-            <img  src="/assets/perfume-thumb.png" alt="Project Thumbnail" class="main-image">
-            <div class="gradient-overlay"></div>
-          </div>
-
-          <div class="project-info">
-            <p class="description">Creator of advertisement interpretation for owned</p>
-            <h4 class="project-title">perfumes by “Fakhar Lattafa” & “JFENZI”</h4>
-          </div>
-        </div>
-        
-        <!-- PROJECT CARD -->
-      <div class="project-card" onclick="openProject('youth')" style="cursor: pointer;">
-        <div class="image-container">
-          <div class="play-button"><img src="/assets/Play.svg" alt="Project Thumbnail" class="main-image"></div>
-          <img  src="/assets/creative-youth-thumb.png" alt="Project Thumbnail" class="main-image">
-          <div class="gradient-overlay"></div>
-        </div>
-
-        <div class="project-info">
-          <p class="description">Producer of a TV show prototype</p>
-          <h4 class="project-title">Creative Youth | Kūrybiškasis Jaunimas </h4>
-        </div>
-      </div>
-        <!-- PROJECT CARD -->
-        <div class="project-card" onclick="openProject('spongebob')" style="cursor: pointer;">
-          <div class="image-container">
-            <div class="play-button"><img src="/assets/Play.svg" alt="Project Thumbnail" class="main-image"></div>
-            <img  src="/assets/spongebob-thumb.png" alt="Project Thumbnail" class="main-image">
-            <div class="gradient-overlay"></div>
-          </div>
-
-          <div class="project-info">
-            <p class="description">Squidward character & environment animator in cartoon project</p>
-            <h4 class="project-title">Sponge and friends | Kempinė ir draugai</h4>
-          </div>
-        </div>
-
-        <!-- PROJECT CARD -->
-        <div class="project-card" onclick="openProject('luktelk')" style="cursor: pointer;">
-          <div class="image-container">
-            <div class="play-button"><img src="/assets/Play.svg" alt="Project Thumbnail" class="main-image"></div>
-            <img  src="/assets/Luktelk-THUMBNAIL.png" alt="Project Thumbnail" class="main-image">
-            <div class="gradient-overlay"></div>
-          </div>
-
-          <div class="project-info">
-            <p class="description">Creator of a visual karaoke and VFX for song</p>
-            <h4 class="project-title">“Luktelk” by Silvester Belt</h4>
-          </div>
-        </div>
-
-        <!-- PROJECT CARD -->
-        <a class="link" href="https://youtu.be/hgdXx1Ef16g" target="_blank">
-          <div class="project-card">
-            <div class="image-container">
-              <div class="play-button"><img src="/assets/Play.svg" alt="Project Thumbnail" class="main-image"></div>
-              <img  src="/assets/flashbacks-inna-thumb.png" alt="Project Thumbnail" class="main-image">
-              <div class="gradient-overlay"></div>
-            </div>
-
-            <div class="project-info">
-              <p class="description">Creator of a visual karaoke and VFX for song</p>
-              <h4 class="project-title">“Flashbacks” by INNA</h4>
-            </div>
-          </div>
-        </a>
-      </div>
+.hero-info{
+  z-index:1;
+  height:100%;
+  position:relative;
+  display:flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  gap:0;
+}
 
 
-      <h3>Software and interactive engineering</h3> 
+.contacts-wrap{
+  position:absolute;
+  display:flex;
+ flex-direction: row;
+ gap:80px;
+}
 
-      <div class="projects-grid">
-        <!-- PROJECT CARD -->
-        <div class="project-card">
-          <div class="image-container">
-            <img src="/assets/jaunyste-website.png" alt="Project Thumbnail" class="main-image">
-            
-            <div class="gradient-overlay"></div>
+.location, .telephone, .email{
+  display:flex;
+  flex-direction: row;
+  gap:10px;
+  height:30px;
+  font-size: 20px;
+  white-space: nowrap;
+}
 
-            <div class="labels-wrapper">
-              <div class="badge">
-                <img src="/assets/incentive-award.png" alt="icon">
-                <span>Awarded Incentive Prize by Artistic Director</span>
-              </div>
-            </div>
-          </div>
+.location img, .telephone img, .email img{
+  height:28px;
+}
 
-          <div class="project-info">
-            <p class="description">Ongoing full-stack webpage development in 100th anniversary commemoration of  KTU academic choir</p>
-            <h4 class="project-title">“Jaunystė”</h4>
-          </div>
-        </div>
+.contacts-t{
+  font-family: 'Anta', sans-serif;
+}
+.profile-photo {
+    z-index:1;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-left:50px;
+  transition: transform 0.4s ease;
+}
+.profile-photo:hover {
+  transform: scale(1.05);
+}
 
-        <!-- PROJECT CARD -->
-        <div class="project-card" onclick="openProject('locatr')" style="cursor: pointer;">
-          <div class="image-container">
-            <div class="play-button"><img src="/assets/Play.svg" alt="Project Thumbnail" class="main-image"></div>
-            <img src="/assets/locatr-app.png" alt="Project Thumbnail" class="main-image">
-            
-            <div class="gradient-overlay"></div>
+.profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-            <div class="labels-wrapper">
-              <div class="badge">
-                <img src="/assets/technorama1.png" alt="icon">
-                <span>“Technorama 2025” attendee at KTU</span>
-              </div>
-              <div class="badge">
-                <img src="/assets/technorama-rated.png" alt="icon">
-                <span>Publicly voted 19th among 74 innovations on lrytas.lt</span>
-              </div>
-            </div>
-          </div>
+.name {
+  font-family: 'Anta', sans-serif;
+  font-size: 64px;
+  text-align: left;
+}
 
-          <div class="project-info">
-            <p class="description">Full-stack developer of mobile application for leisure and event planning - </p>
-            <h4 class="project-title">“Locatr”</h4>
-          </div>
-        </div>
+.surname {
+  font-family: 'Anta', sans-serif;
+  font-size: 40px;
+  text-align: left;
+}
 
-        <!-- PROJECT CARD -->
-        <div class="project-card">
-          <div class="image-container">
-            <img src="/assets/tds-game.png" alt="Project Thumbnail" class="main-image">
-            <div class="gradient-overlay"></div>
-          </div>
+.role {
+  text-align: center;
+  color: var(--accent-light);
+  margin-top:10px;
+  font-weight:1000;
+  font-size:24px;
+}
 
-          <div class="project-info">
-            <p class="description">Developer of Unity-based strategy game</p>
-            <h4 class="project-title">“Tower Defense Seasons”</h4>
-          </div>
-        </div>
+.portfolio-t{
+    width:100%;
+    font-family: 'Anta', sans-serif;
+    padding:50px;
+    font-size:40px;
+    text-align: center;
+}
 
-        <!-- PROJECT CARD -->
-        <div class="project-card" onclick="openProject('mmm')" style="cursor: pointer;">
-          <div class="image-container">
-            <div class="play-button"><img src="/assets/Play.svg" alt="Project Thumbnail" class="main-image"></div>
-            <img src="/assets/mmm-thumb.png" alt="Project Thumbnail" class="main-image">
-            <div class="gradient-overlay"></div>
-          </div>
+.port-container { max-width: 1200px; margin: 0 auto; }
+.port-header { margin-bottom: 60px; text-align: left; }
+.project-title { font-family: 'Anta', sans-serif; font-size: 48px; color: var(--text); }
+.back-link { color: var(--accent-light); text-decoration: none; font-size: 18px; margin-bottom: 10px; display: block; }
+.back-link:hover { text-decoration: underline; }
 
-          <div class="project-info">
-            <p class="description">Front-end & VFX designer for web-based game</p>
-            <h4 class="project-title">“Mosaic Memory Master”</h4>
-          </div>
-        </div>
 
-        <!-- PROJECT CARD -->
-        <div class="project-card" onclick="openProject('mall-map')" style="cursor: pointer;">
-          <div class="image-container">
-            <div class="play-button"><img src="/assets/Play.svg" alt="Project Thumbnail" class="main-image"></div>
-            <img src="/assets/ftf-thumb.png" alt="Project Thumbnail" class="main-image">
-            <div class="gradient-overlay"></div>
-          </div>
 
-          <div class="project-info">
-            <p class="description">Solo creator of a mall map as a submission for </p>
-            <h4 class="project-title">Roblox game “Flee The Facility”</h4>
-          </div>
-        </div>
 
-      </div>
-    </section>
-    
-    <section class="side-links">
-    <h2>Links</h2>
-    <div class="link-wrap">
-    <a class="link" href="https://www.linkedin.com/in/tadas-cikanavičius/" target="_blank">
 
-      <div class="linked-line">
-        <img src="/assets/Linkedin.svg" alt="LinkedIn logo">
-        <p>LinkedIn - Tadas Cikanavičius</p>
-      </div>
+/* Portfolio specific Grid */
+.gallery-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+gap: 30px;
+}
 
-      <div class ="qr-linkedin"><img src="/assets/QR-linkedin.png" alt="LinkedIn logo"></div>
-    </a>
+.project-s{
+  background: var(--accent);
+  margin:0;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 20px;
+  
+}
 
-    
-    <a class="link" href="index.html" target="_blank">
+.project-card {
+  width: 500px; /* Adjust based on your needs */
+  margin: 0 auto;
+}
 
-      <div class="linked-line">
-        <p>CV - Tadas Cikanavičius</p>
-      </div>
+.featured-video-section {
+    width: 100%;
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center; /* Centers the card horizontally */
+}
 
-      <div class ="qr-linkedin"><img src="/assets/QR-linkedin.png" alt="LinkedIn logo"></div>
+.showreel-card {
+    width: 100%;
+    max-width: 800px; /* Adjust this number to make the video smaller or larger */
+    cursor: pointer;
+    transition: transform 0.4s ease;
+}
 
-    </a>
-    </div>
-  </section>
-<script>
-        // 1. DATABASE: Map your #hashes to YouTube IDs
-        const projectData = {
-            'uninvited-guests': { title: 'Uninvited Guests | Nekviesti Svečiai', ytId: 'K6ctm9RXYHM' },
-            'under-control': { title: 'Under Control | Kontrolėje', ytId: 'iQ6A5atLH3U' },
-            'my-canine-friend': { title: 'TV show prototype - My Canine Friend | Mano Draugas Šuo', ytId: 'T0toD5GmbNs' },
-            'itu': { title: '“Into The Unknown“ | Male version - feat. Ry & Rusnė', ytId: 'wA1euszDNg8' },
-            'behind-the-matrix': { title: 'Behind The Matrix', ytId: 'MwDlL0TmZfI' },
-            'perfumes': { title: 'AD for perfumes by “Fakhar Lattafa” & "JFENZI”' , ytId: 'bFihyfLjovk' },
-            'spongebob': { title: 'Sponge and friends | Kempinė ir draugai', ytId: 'M0zG2KqQij0' },
-            'youth': { title: 'TV show prototype - Creative Youth | Kūrybiškasis Jaunimas', ytId: 'UdYZE36pF2I' },
-            'luktelk': { title: 'Karaoke and VFX for song “Luktelk” by Silvester Belt', ytId: 'acNbtXhonoo' },
-            'locatr': { title: 'Mobile application for leisure and event planning - Locatr', ytId: 'TqoUXBTs0lc' },
-            'mmm': { title: 'Web-based game - Mosaic Memory Master', ytId: 'wYMRgVa-XaI' },
-            'mall-map': { title: 'Mall map submission for Roblox game “Flee The Facility”', ytId: 'nhGEQ-XwhYE' },
-            'showreel': { title: 'Tadas Cikanavičius - Showreel 2026', ytId: 'tEAHWtII-us' }
-        };
+.showreel-card:hover {
+    transform: scale(1.02); /* Subtle lift on hover */
+}
 
-        const modal = document.getElementById('videoModal');
-        const iframe = document.getElementById('modalIframe');
-        const title = document.getElementById('modalTitle');
+/* Ensure the image container maintains the 16:9 ratio even when smaller */
+.showreel-card .image-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9; 
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0px 40px rgba(255, 255, 255, 0.2);
+}
 
-        // 2. OPEN LOGIC
-        function openProject(id, isAutomatic = false) {
-            const data = projectData[id];
-            if (data) {
-                // Build the URL - mute=1 is essential for autoplay to work on page load
-                iframe.src = `https://www.youtube.com/embed/${data.ytId}?autoplay=1&loop=1&playlist=${data.ytId}&rel=0&modestbranding=1`;
-                document.getElementById('modalTitle').innerText = data.title;
-                modal.style.display = 'flex';
-            }
-        }
 
-        // 3. CLOSE LOGIC (Stops video and hides modal)
-          function closeModal() {
-              const modal = document.getElementById('videoModal');
-              const iframe = document.getElementById('modalIframe');
+/* 1. Image & Gradient Container */
+.image-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10; /* Maintains the rectangle shape */
+  overflow: visible;
+}
 
-              // 1. Start the CSS animation by adding the class
-              modal.classList.add('is-closing');
+.play-button{
+  z-index: 1;
+  position:absolute;
+  height:50px;
+  width:50px;
+  bottom:10px;
+  left:10px;
+  opacity: 0.1;
+  transition: all 0.8s ease;
+}
 
-              // 2. Wait for the animation to finish (300ms)
-              setTimeout(() => {
-                  modal.style.display = 'none';      // Hide the modal
-                  modal.classList.remove('is-closing'); // Reset class for next time
-                  iframe.src = "";                   // Stop the video
-                  document.body.style.overflow = 'auto'; // Re-enable scrolling
-              }, 300); 
-          }
+.project-card:hover .play-button {
+  transform: scale(1.15);
+  opacity: 1;
+}
 
-        // 4. AUTO-LOAD ON ARRIVAL
-        window.addEventListener('load', () => {
-            const hash = window.location.hash.substring(1);
-            if (hash) {
-                // Wait 1000ms (1 second) before popping the video
-                setTimeout(() => {
-                    openProject(hash, true);
-                }, 1000); 
-            }
-        });
+.play-button img{
+  height: 100%;
+  width: 100%;
+}
 
-        // Close if user clicks outside the video box
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
-    </script>
-</body>
-</html>
+.main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 99%;
+  background: linear-gradient(to right, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 40%);
+  pointer-events: none;
+}
+
+.labels-wrapper {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 9px;
+  overflow: visible;
+  max-width: 150px;
+  max-height:50px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: transform 0.4s ease;
+}
+
+
+.badge:hover{
+  transform: scale(1.20);
+  
+}
+
+.badge img {
+  height: 52px;
+  width:52px;
+  max-width: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.badge span {
+  padding: 0 8px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--dark);
+  line-height: 1.2;
+}
+
+.project-info {
+  text-align: center;
+  margin-top: 8px;
+  color: var(--text-light);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 40px 20px; 
+  padding: 20px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.project-card {
+  width: 100%; 
+  transition: transform 0.4s ease;
+}
+
+.project-card:hover{
+  transform: scale(1.05);
+}
+
+
+
+.project-s h3{
+  font-size:25px;
+  padding-top:50px;
+}
+
+.project-s h4{
+  font-size:20px;
+}
+
+.description {
+  font-size: 20px;
+  font-weight: 300;
+  opacity: 0.9;
+}
+
+.project-title {
+  font-size: 25px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.personal-dev-s{
+  padding:20px;
+  margin:20px;
+}
+
+.gallery-card { background: var(--panel); overflow: hidden; transition: transform 0.3s ease; }
+.gallery-card:hover { transform: translateY(-10px); }
+.gallery-card img { width: 100%; height: 250px; object-fit: cover; }
+.gallery-content { padding: 20px; }
+.gallery-content h3 { font-family: 'Anta', sans-serif; color: var(--text); margin-bottom: 10px; }
+.gallery-content p { color: var(--muted); font-size: 16px; }
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 9999;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+
+    opacity: 0;
+    animation: modalAppear 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) 0.1s forwards;
+}
+
+/* KEYFRAMES */
+@keyframes fadeInBg {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes modalAppear {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Animation for closing the background */
+@keyframes fadeOutBg {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Animation for shrinking the modal box */
+@keyframes modalDisappear {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+}
+
+/* This class will be added via JavaScript when closing */
+.modal.is-closing {
+    animation: fadeOutBg 0.3s ease-in forwards;
+}
+
+.modal.is-closing .modal-content {
+    animation: modalDisappear 0.3s ease-in forwards;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.close-header {
+    width: 100%;
+    height: 60px; /* Gives the button its own space */
+    background: #000;
+    display: flex;
+    justify-content: flex-end; /* Pushes button to the right */
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.close-area {
+    position: relative; /* Changed from absolute */
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    color: white;
+    font-family: 'Anta', sans-serif;
+    transition: all 0.3s ease;
+    padding: 5px 10px;
+}
+
+/* The actual "X" button circle */
+.x-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 2px solid white;
+    border-radius: 50%;
+    font-size: 22px;
+    line-height: 0;
+    padding-bottom: 2px;
+}
+
+.close-text {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.close-area:hover {
+    color: var(--muted);
+}
+
+.close-area:hover .x-btn {
+    border-color: var(--muted);
+}
+
+#modalTitle {
+    padding: 15px;
+    color: white;
+    font-family: 'Anta', sans-serif;
+    margin: 0;
+    background: var(--panel);
+}
+
+/* Container to center the spinner */
+.loader-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg); /* Uses your variable */
+    z-index: 0;
+}
+
+/* The Spinner Animation */
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255, 255, 255, 0.1);
+    border-top: 5px solid var(--accent-light); /* Matches your accent color */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Ensure the iframe stays above the loader once it appears */
+#modalIframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background: transparent;
+}
+
+
+
+.link-wrap{
+  display:flex;
+  flex-direction: row;
+  gap: 200px;
+}
+
+.link{
+  text-decoration: none; /* Removes the underline */
+  color: inherit;        /* Removes the blue (adopts parent color) */
+  display: inline-block; /* Ensures the anchor wraps your divs properly */
+  transition: color 0.3s;
+}
+
+.link p{
+  text-decoration: none;
+  margin: 0;
+}
+
+
+
+.linked-line{
+  display:flex;
+  flex-direction: row;
+  gap: 7px;
+}
+
+.side-links a:hover{
+  color:var(--muted);
+}
+
+.side-links{
+    font-family: 'Almarai:Regular',sans-serif;
+
+    padding:70px;
+}
+
+.side-links h2{
+  font-family: 'Anta', sans-serif;
+  margin-bottom:20px;
+}
+.linked-line img{
+  height:18px;
+  width:18px;
+}
+
+.qr-linkedin {
+  margin-top:10px;
+  width: 70px;
+  height: 70px;
+  margin-bottom:30px;
+}
+
+.qr-linkedin img{
+  height:100%;
+  width:100%;
+}
+
+@media (max-width: 1504px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 1260px) {
+  
+    .portfolio-t{
+        font-size:20px;
+    }
+  .heading{
+    transform: scale(0.8) translateX(-50px);
+  }
+
+  .summary-mobile h2{
+    color:#fff;
+  }
+
+  .side-summary {
+    display: none;
+  } 
+
+  .side-education{
+  margin-top:20px;
+  }
+
+  .side-languages{
+  margin-top:100px;
+  }
+
+
+/* 1. Header Responsiveness */
+  .header-s {
+    height: auto;
+    min-height: 400px; /* Allow it to grow if text wraps */
+    background-size: cover;
+  }
+  .header-s::after {
+    background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+  }
+
+  .main-wrap {
+    grid-template-columns: 1fr; /* Stack photo and info */
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  .profile-photo {
+    margin: 0 auto 20px auto; /* Center the photo */
+  }
+
+  .hero-info {
+    align-items: center; /* Center Name and Role */
+  }
+
+  .contacts-wrap {
+    position: relative; /* Remove absolute positioning */
+    flex-direction: column; /* Stack contact items */
+    gap: 15px;
+    bottom: 0;
+    margin-top: 30px;
+  }
+
+  /* 2. Main Content Reordering */
+  .cv {
+    display: flex;
+    flex-direction: column; /* Stack columns vertically */
+  }
+
+  .content {
+    order: 1; /* Force Right side to be FIRST */
+    background: var(--bg-light);
+  }
+
+  .sidebar {
+    order: 2; /* Force Left side to be SECOND */
+    width: 100%;
+  }
+
+  /* 3. Summary Transfer Logic */
+  .summary-desktop {
+    display: none; /* Hide from Sidebar */
+  }
+
+  .summary-mobile {
+    display: block; /* Show at the top of Content */
+    padding-bottom: 0; /* Tighten spacing */
+    color:var(--dark);
+  }
+
+  /* 4. Fix Project Grid */
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Specific Modal Fix for Mobile */
+@media (max-width: 768px) {
+
+    .modal-content {
+        width: 100%;       /* Use full available width */
+        max-width: 80vw;   /* Ensure it never exceeds the viewport width */
+        border-radius: 8px; /* Slightly smaller radius for mobile */
+        margin-right:70px;
+    }
+
+    .close-header {
+        height: 50px;      /* Slimmer header for mobile */
+        padding: 0 0px;
+    }
+
+    .close-text {
+        font-size: 12px;   /* Smaller text to prevent pushing the X button */
+    }
+
+    #modalTitle {
+        font-size: 18px;   /* Shrink title so it doesn't wrap awkwardly */
+        padding: 10px;
+    }
+}
