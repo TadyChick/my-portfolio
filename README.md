@@ -6,7 +6,7 @@ This repository contains the source code for my professional portfolio and digit
 
 ---
 
-## 🎥 Showreel 2024
+## 🎥 Showreel
 The centerpiece of this portfolio is my latest showreel, which highlights:
 * **3D Modeling & Animation:** High-fidelity renders and cinematic sequences.
 * **Technical Direction:** Managing complex content pipelines from concept to export.
