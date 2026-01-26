@@ -155,7 +155,7 @@ body {
   height: 350px;
   width: 100%;
   /* Move background here to ensure it's tied to the 300px height */
-  background-image: url('/assets/banner-sea.png');
+  background-image: url('assets/banner-sea.png');
   background-size: auto auto;
   background-position: right;
   background-repeat: no-repeat;
