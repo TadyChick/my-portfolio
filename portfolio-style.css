@@ -22,7 +22,7 @@ body { background: var(--bg); padding: 40px 20px; font-family: 'Almarai:Regular'
   height: 350px;
   width: 100%;
   /* Move background here to ensure it's tied to the 300px height */
-  background-image: url('/assets/banner-sea.png');
+  background-image: url('assets/banner-sea.png');
   background-size: auto auto;
   background-position: right;
   background-repeat: no-repeat;
@@ -691,4 +691,5 @@ gap: 30px;
   .projects-grid {
     grid-template-columns: 1fr;
   }
+
 }
